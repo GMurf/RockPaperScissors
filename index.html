@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  
+  <title>Frontend Mentor | Rock, Paper, Scissors</title>
+	
+	
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+ 
+  </style>
+</head>
+<body>
+
+<div class="header">
+		<img src="./images/logo.svg" />
+		<div class="scoreboard">
+			Score
+		</div>
+		<div class="score">
+		
+		</div>
+	</div>
+	
+	
+	
+	<div class="rules">
+		<button class="rulesBtn">
+			Rules
+		</button>
+		<img src="./images/image-rules.svg">
+	</div>
+	
+	
+	<div class="lower">
+	<div class="midSection">
+		<div class="picks">
+			<div class="yourPickContainer">
+				<div class="youPicked">
+					
+				</div>
+				<span class="youPickedText">
+				You Picked
+				</span>
+			</div>
+			<div class="housePickCointainer">
+				<div class="housePicked">
+						
+				</div>
+				<div class="housePickedText">
+					The House Picked
+				</div>
+			</div>
+	</div>
+	<div class="graphic">
+		<div class="select">
+			<img src="./images/bg-triangle.svg" class="triangle">
+			<div class="selections">
+				<img onclick="play('scissors')" src="./images/icon-scissors.svg" class="rock">
+				<img onclick="play('rock')" src="./images/icon-rock.svg" class="paper">
+				<img onclick="play('paper')" src="./images/icon-paper.svg" class="scissors">
+			</div>
+		</div>
+	</div>	
+	<div class="result">
+	<div id="userChoice" class="userChoice">
+	</div>
+		<span class="win">
+			You Win
+		</span>
+		<span class="lose">
+			You Lose
+		</span>
+		<button onclick=(showMain())>
+			Play Again
+		</button>
+		
+	<div id="computerChoice" class="computerChoice">
+	</div>
+	</div>
+	
+	</div>
+	</div>
+
+
+
+
+  
+  <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+    Coded by <a href="#">Your Name Here</a>.
+  </div>
+  
+  <script>
+	let score = 0;
+	let user = '';
+	let choices = ['rock', 'scissors', 'paper']
+	let picksPage = document.getElementsByClassName('picks')[0]
+	let resultPage = document.getElementsByClassName('result')[0]
+	let rulesPage = document.getElementsByClassName('rules')[0]
+	let mainPage = document.getElementsByClassName('graphic')[0]
+	
+	closePages()
+	showMain()
+	updateScore();
+	
+	function closePages(){
+	picksPage.style.display = "none"
+	resultPage.style.display = "none"
+	rulesPage.style.display = "none"
+	mainPage.style.display = "none"
+	}
+	function showPicks(){
+		closePages()
+		picksPage.style.display = 'block'
+		
+	}
+	function showResult(){
+		closePages()
+		resultPage.style.display = 'block'
+		
+	}
+	function showRules(){
+		closePages()
+		rulesPage.style.display = 'block'
+		
+	}
+	function showMain(){
+		closePages()
+		mainPage.style.display = 'block'
+		
+	}
+	function updateScore(winner){
+		
+		if(winner){
+		document.getElementsByClassName('score')[0].textContent = ++score;
+		console.log('is it a winner  ' + winner+ 'score   ' + score)
+		}else{
+			document.getElementsByClassName('score')[0].textContent = score;
+		console.log('is it a winner  ' + winner+ '  score   ' + score)
+		}
+	}
+	function play(userChoice){
+	
+		let remainingChoice = choices.filter((choice)=> choice == userChoice ? false:true)
+		console.log(userChoice + " user choice" )
+		computerChoice =  remainingChoice[Math.floor(Math.random()*2)]
+		console.log(computerChoice + " computer Choice")
+		if((choices.indexOf(userChoice) === 2) || (choices.indexOf(computerChoice) === 2)){
+			if(choices.indexOf(computerChoice)< choices.indexOf(userChoice)){
+				choices.indexOf(computerChoice) == 0 ? updateScore(true): updateScore(false);
+				
+				return;
+			}
+			choices.indexOf(userChoice) == 0 ? updateScore(false) : updateScore(true)
+			
+		
+			return;
+		}
+		if( choices.indexOf(computerChoice) > choices.indexOf(userChoice) ){
+			updateScore(true)
+			console.log('win()');
+			return;
+		}
+		updateScore(false)
+		console.log('lose()');
+		return;
+	}
+		
+	
+  </script>
+</body>
+</html>
